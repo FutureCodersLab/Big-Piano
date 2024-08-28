@@ -1,4 +1,21 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins");
+
+:root {
+    --background: #e3f2fd;
+    --black: #141414;
+    --green: #50c878;
+    --black-linear-gradient: linear-gradient(#333, black);
+    --active-black-linear-gradient: linear-gradient(to bottom, black, #434343);
+    --active-black-box-shadow: -5px 5px 10px rgba(255, 255, 255, 0.1);
+    --white-linear-gradient: linear-gradient(#fff 96%, #eee 4%);
+    --active-white-linear-gradient: linear-gradient(
+        to bottom,
+        #fff 0%,
+        #eee 100%
+    );
+    --active-white-box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.2);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -11,15 +28,15 @@ body {
     justify-content: center;
     min-height: 100vh;
     padding: 0 10px;
-    background: #e3f2fd;
+    background-color: var(--background);
 }
-.wrapper {
+.piano {
     border-radius: 20px;
     padding: 35px 40px;
-    background: #141414;
+    background-color: var(--black);
 }
-.wrapper header {
-    color: #b2b2b2;
+.piano header {
+    color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -27,92 +44,92 @@ body {
 header h2 {
     font-size: 1.6rem;
 }
-header .column {
+header div {
     display: flex;
     align-items: center;
+    gap: 15px;
 }
-header .column span {
-    font-weight: 500;
-    margin-right: 15px;
-    font-size: 1.19rem;
+header div span {
+    font-size: 1.2rem;
 }
 .volume-slider input {
-    accent-color: #fff;
-    outline: none;
+    accent-color: white;
 }
 .keys-checkbox input {
-    width: 60px;
-    height: 30px;
-    outline: none;
-    cursor: pointer;
     position: relative;
     appearance: none;
+    width: 60px;
+    height: 30px;
     border-radius: 30px;
-    background: #4b4b4b;
+    background-color: gray;
+    cursor: pointer;
+    transition: 0.3s ease background-color;
+}
+.keys-checkbox input:checked {
+    background-color: var(--green);
 }
 .keys-checkbox input::before {
     content: "";
-    height: 20px;
-    width: 20px;
+    position: absolute;
     top: 50%;
     left: 5px;
-    border-radius: inherit;
-    position: absolute;
-    background: #8c8c8c;
     transform: translateY(-50%);
-    transition: all 0.3s ease;
+    height: 20px;
+    width: 20px;
+    border-radius: 30px;
+    background-color: white;
+    transition: 0.3s ease left;
 }
 .keys-checkbox input:checked::before {
     left: 35px;
-    background: #fff;
 }
 .piano-keys {
     display: flex;
     margin-top: 40px;
 }
 .piano-keys .key {
+    position: relative;
     cursor: pointer;
     user-select: none;
     list-style: none;
-    color: #a2a2a2;
-    position: relative;
+    color: gray;
     text-transform: uppercase;
 }
 .piano-keys .black {
     width: 44px;
     height: 140px;
+    margin: 0 -22px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: var(--black-linear-gradient);
     z-index: 2;
-    margin: 0 -22px 0 -22px;
-    border-radius: 0 0 5px 5px;
-    background: linear-gradient(#333, #000);
 }
 .piano-keys .black.active {
-    box-shadow: inset -5px 5px 10px rgba(255, 255, 255, 0.1);
-    background: linear-gradient(to bottom, #000, #434343);
+    box-shadow: var(--active-black-box-shadow);
+    background: var(--active-black-linear-gradient);
 }
 .piano-keys .white {
     width: 70px;
     height: 230px;
     border-radius: 8px;
-    border: 1px solid #000;
-    background: linear-gradient(#fff 96%, #eee 4%);
+    border: 1px solid black;
+    background: var(--white-linear-gradient);
 }
 .piano-keys .white.active {
-    box-shadow: inset -5px 5px 20px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+    box-shadow: var(--active-white-box-shadow);
+    background: var(--active-white-linear-gradient);
 }
 .piano-keys div {
     position: absolute;
-    bottom: 30px;
+    bottom: 35px;
     width: 100%;
     font-size: 1.2rem;
     text-align: center;
-    color: red;
-    text-transform: none;
+    color: crimson;
 }
 .piano-keys span {
     position: absolute;
-    bottom: 5px;
+    bottom: 7px;
     width: 100%;
     font-size: 1rem;
     text-align: center;

@@ -5,13 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Piano JavaScript</title>
         <link rel="stylesheet" href="style.css" />
-        <script src="script.js" defer></script>
+        <script type="module" src="script.js" defer></script>
     </head>
     <body>
-        <div class="wrapper">
+        <div class="piano">
             <header>
                 <h2>Playable PIANO</h2>
-                <div class="column volume-slider">
+                <div class="volume-slider">
                     <span>Volume</span>
                     <input
                         type="range"
@@ -21,7 +21,7 @@
                         step="any"
                     />
                 </div>
-                <div class="column keys-checkbox">
+                <div class="keys-checkbox">
                     <span>Show Keys</span>
                     <input type="checkbox" checked />
                 </div>

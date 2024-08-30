@@ -17,124 +17,149 @@
     --active-white-box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.2);
 }
 
-* {
+body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: var(--font-family);
-}
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 0 10px;
     background-color: var(--background);
 }
-.piano {
-    border-radius: 20px;
-    padding: 35px 40px;
-    background-color: var(--black);
+
+#container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
 }
+
+.piano {
+    align-self: center;
+    background-color: var(--black);
+    padding: 35px 40px;
+    border-radius: 20px;
+}
+
 .piano header {
     color: white;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
 }
+
 header h2 {
     font-size: 1.6rem;
 }
+
 header div {
     display: flex;
     align-items: center;
     gap: 15px;
 }
+
 header div span {
     font-size: 1.2rem;
 }
+
 .volume-slider input {
     accent-color: white;
 }
+
 .keys-checkbox input {
     position: relative;
     appearance: none;
     width: 60px;
     height: 30px;
-    border-radius: 30px;
     background-color: gray;
+    border-radius: 30px;
     cursor: pointer;
     transition: 0.3s ease background-color;
 }
+
 .keys-checkbox input:checked {
     background-color: var(--green);
 }
+
 .keys-checkbox input::before {
     content: "";
     position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
     height: 20px;
     width: 20px;
     border-radius: 30px;
     background-color: white;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
     transition: 0.3s ease left;
 }
+
 .keys-checkbox input:checked::before {
     left: 35px;
 }
+
 .piano-keys {
     display: flex;
+    margin: 0;
+    padding: 0;
     margin-top: 40px;
 }
+
 .piano-keys .key {
+    color: gray;
+    list-style: none;
     position: relative;
     cursor: pointer;
-    user-select: none;
-    list-style: none;
-    color: gray;
-    text-transform: uppercase;
 }
-.piano-keys .black {
-    width: 44px;
-    height: 140px;
-    margin: 0 -22px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    background: var(--black-linear-gradient);
-    z-index: 2;
+
+.piano-keys .key.hide span {
+    display: none;
 }
-.piano-keys .black.active {
-    box-shadow: var(--active-black-box-shadow);
-    background: var(--active-black-linear-gradient);
+
+.piano-keys .key.hide div {
+    display: none;
 }
+
 .piano-keys .white {
+    background: var(--white-linear-gradient);
     width: 70px;
     height: 230px;
     border-radius: 8px;
     border: 1px solid black;
-    background: var(--white-linear-gradient);
+    transition: 0.3s ease all;
 }
+
 .piano-keys .white.active {
     box-shadow: var(--active-white-box-shadow);
     background: var(--active-white-linear-gradient);
 }
+
+.piano-keys .black {
+    background: var(--black-linear-gradient);
+    width: 44px;
+    height: 140px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin: 0 -22px;
+    z-index: 2;
+    transition: 0.3s ease all;
+}
+
+.piano-keys .black.active {
+    box-shadow: var(--active-black-box-shadow);
+    background: var(--active-black-linear-gradient);
+}
+
 .piano-keys div {
-    position: absolute;
-    bottom: 35px;
-    width: 100%;
     font-size: 1.2rem;
     text-align: center;
+    width: 100%;
     color: crimson;
+    position: absolute;
+    bottom: 35px;
 }
+
 .piano-keys span {
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
     position: absolute;
     bottom: 7px;
-    width: 100%;
-    font-size: 1rem;
-    text-align: center;
-}
-.piano-keys .key.hide span {
-    display: none;
 }

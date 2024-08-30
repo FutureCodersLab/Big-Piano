@@ -8,25 +8,27 @@
         <script type="module" src="script.js" defer></script>
     </head>
     <body>
-        <div class="piano">
-            <header>
-                <h2>Playable PIANO</h2>
-                <div class="volume-slider">
-                    <span>Volume</span>
-                    <input
-                        type="range"
-                        min="0"
-                        max="1"
-                        value="0.5"
-                        step="any"
-                    />
-                </div>
-                <div class="keys-checkbox">
-                    <span>Show Keys</span>
-                    <input type="checkbox" checked />
-                </div>
-            </header>
-            <ul class="piano-keys"></ul>
+        <div id="container">
+            <div class="piano">
+                <header>
+                    <h2>Piano</h2>
+                    <div class="volume-slider">
+                        <span>Volume</span>
+                        <input
+                            type="range"
+                            min="0"
+                            max="1"
+                            value="0.5"
+                            step="any"
+                        />
+                    </div>
+                    <div class="keys-checkbox">
+                        <span>Show Keys</span>
+                        <input type="checkbox" checked />
+                    </div>
+                </header>
+                <ul class="piano-keys"></ul>
+            </div>
         </div>
     </body>
 </html>

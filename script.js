@@ -3,12 +3,27 @@ import { keys } from "./keys.js";
 const allKeys = [];
 const audioMap = {};
 
+document.addEventListener("DOMContentLoaded", () => {
+    const pianoKeysContainer = document.querySelector(".piano-keys");
+    const keysCheckbox = document.querySelector(".keys-checkbox input");
+
+    createPianoKeys(pianoKeysContainer);
+    preloadAudio();
+
+    pianoKeysContainer.querySelectorAll(".key").forEach((key) => {
+        key.addEventListener("click", () => playTune(key.dataset.key));
+    });
+
+    keysCheckbox.addEventListener("click", showHideKeys);
+    document.addEventListener("keydown", pressedKey);
+});
+
 const createPianoKeys = (container) => {
     keys.forEach(({ label, key, isBlack, mappedKey }) => {
         const li = document.createElement("li");
         li.className = `key ${isBlack ? "black" : "white"}`;
-        const displayKey = mappedKey || key;
 
+        const displayKey = mappedKey || key;
         li.dataset.key = displayKey;
         li.innerHTML = `
             <div>${label}</div>
@@ -21,8 +36,15 @@ const createPianoKeys = (container) => {
 
 const preloadAudio = () => {
     allKeys.forEach((key) => {
-        audioMap[key] = new Audio(`pianoKeys/${key}.mp3`);
+        audioMap[key] = new Audio(`./pianoKeys/${key}.mp3`);
     });
+};
+
+const pressedKey = (e) => {
+    const { mappedKey } = keys.find(({ key }) => key === e.key);
+    const key = mappedKey || e.key;
+
+    if (allKeys.includes(key)) playTune(key);
 };
 
 const playTune = (key) => {
@@ -36,9 +58,7 @@ const playTune = (key) => {
     const clickedKey = document.querySelector(`[data-key="${key}"]`);
     clickedKey.classList.add("active");
 
-    setTimeout(() => {
-        clickedKey.classList.remove("active");
-    }, 150);
+    setTimeout(() => clickedKey.classList.remove("active"), 150);
 };
 
 const showHideKeys = () => {
@@ -46,33 +66,3 @@ const showHideKeys = () => {
         key.classList.toggle("hide");
     });
 };
-
-const handleVolume = (e) => {
-    Object.values(audioMap).forEach(({ volume }) => {
-        volume = e.target.value;
-    });
-};
-
-const pressedKey = (e) => {
-    const { mappedKey } = keys.find(({ key }) => key === e.key);
-    const key = mappedKey || e.key;
-
-    if (allKeys.includes(key)) playTune(key);
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-    const pianoKeysContainer = document.querySelector(".piano-keys");
-    const volumeSlider = document.querySelector(".volume-slider input");
-    const keysCheckbox = document.querySelector(".keys-checkbox input");
-
-    createPianoKeys(pianoKeysContainer);
-    preloadAudio();
-
-    pianoKeysContainer.querySelectorAll(".key").forEach((key) => {
-        key.addEventListener("click", () => playTune(key.dataset.key));
-    });
-
-    keysCheckbox.addEventListener("click", showHideKeys);
-    volumeSlider.addEventListener("input", handleVolume);
-    document.addEventListener("keydown", pressedKey);
-});

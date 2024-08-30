@@ -19,14 +19,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const createPianoKeys = (container) => {
-    keys.forEach(({ label, key, isBlack, mappedKey }) => {
+    keys.forEach(({ note, key, isBlack, mappedKey }) => {
         const li = document.createElement("li");
         li.className = `key ${isBlack ? "black" : "white"}`;
 
         const displayKey = mappedKey || key;
         li.dataset.key = displayKey;
         li.innerHTML = `
-            <div>${label}</div>
+            <div>${note}</div>
             <span>${key.toUpperCase()}</span>
         `;
         container.appendChild(li);
@@ -51,8 +51,10 @@ const playTune = (key) => {
     const audio = audioMap[key];
     if (!audio) return;
 
+    const volumeInput = document.querySelector(".volume-slider input");
+
     audio.currentTime = 0;
-    audio.volume = document.querySelector(".volume-slider input").value;
+    audio.volume = volumeInput.value;
     audio.play();
 
     const clickedKey = document.querySelector(`[data-key="${key}"]`);
